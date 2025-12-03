@@ -41,9 +41,11 @@ export default function Todos(){
                 tod.id === data.id ? {...tod, ...data} : tod
             )
         )
+        setOpen(false);
     }
 
     const openModal = (data: Todos) => {
+        setOpen(prev => !prev);
         console.log('edit');
         setFormsEdit(prev => ({...prev, ...data}))
         console.log(formEdit)
@@ -59,7 +61,7 @@ export default function Todos(){
     }
 
     return <>
-        <div>Display</div>
+        <div className="border">To-dos</div>
         <div>
             {todos.length === 0 ? (
                 <div>no data</div>
@@ -84,7 +86,7 @@ export default function Todos(){
             </div>
         </div>
 
-        <div className="mt-6 border">
+        <div className={open ? "block" : "hidden"}>
             <div>Edit Todo</div>
             <div id="forms">
                 <input type="text" placeholder="input" className="border" value={formEdit.text}
